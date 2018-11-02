@@ -21,8 +21,8 @@ public class HistoriaClinicaServiceImpl implements HistoriaClinicaService {
 	}
 
 	@Override
-	public void saveHC(Historiaclinica hc) {
-		historiaClinicaDao.saveHC(hc);
+	public Historiaclinica saveHC(Historiaclinica hc) {
+		return historiaClinicaDao.saveHC(hc);
 	}
 
 	@Override

@@ -23,8 +23,9 @@ public class HistoriaClinicaDaoImpl implements HistoriaClinicaDao{
 		return historiaClinicaRepository.findById(id).get();
 	}
 	@Override
-	public void saveHC(Historiaclinica hc) {
+	public Historiaclinica saveHC(Historiaclinica hc) {
 		historiaClinicaRepository.save(hc);
+		return hc;
 		
 	}
 
