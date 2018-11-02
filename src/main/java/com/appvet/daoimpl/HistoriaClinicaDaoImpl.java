@@ -17,11 +17,11 @@ public class HistoriaClinicaDaoImpl implements HistoriaClinicaDao{
 	@Autowired
 	HistoriaClinicaRepository historiaClinicaRepository;
 
-	@Override
-	public List<Historiaclinica> getAllHC() {
-		return (List<Historiaclinica>) historiaClinicaRepository.findAll();
-	}
 
+	@Override
+	public Historiaclinica getOneHC(int id) {
+		return historiaClinicaRepository.findById(id).get();
+	}
 	@Override
 	public void saveHC(Historiaclinica hc) {
 		historiaClinicaRepository.save(hc);
@@ -33,5 +33,7 @@ public class HistoriaClinicaDaoImpl implements HistoriaClinicaDao{
 		historiaClinicaRepository.deleteById(id);
 		
 	}
+
+	
 
 }

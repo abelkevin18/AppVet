@@ -29,4 +29,10 @@ public class MascotaServiceImpl implements MascotaService {
 		mascotaDao.deleteMascota(id);
 	}
 
+	@Override
+	public Mascota getOneMascota(int id) {
+		// TODO Auto-generated method stub
+		return mascotaDao.getOneMascota(id);
+	}
+
 }

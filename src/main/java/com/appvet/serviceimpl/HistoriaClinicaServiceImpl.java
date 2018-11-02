@@ -16,8 +16,8 @@ public class HistoriaClinicaServiceImpl implements HistoriaClinicaService {
 	HistoriaClinicaDao historiaClinicaDao;
 	
 	@Override
-	public List<Historiaclinica> getAllHC() {
-		return historiaClinicaDao.getAllHC();
+	public Historiaclinica getOneHC(int id) {
+		return historiaClinicaDao.getOneHC(id);
 	}
 
 	@Override
@@ -29,5 +29,7 @@ public class HistoriaClinicaServiceImpl implements HistoriaClinicaService {
 	public void deleteHC(int id) {
 		historiaClinicaDao.deleteHC(id);
 	}
+
+	
 
 }

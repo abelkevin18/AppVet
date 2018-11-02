@@ -23,7 +23,7 @@
 <title>Historia Clinica</title>
 </head>
 <body>
-	<h1>registrar historia</h1>
+	<h1>detalle historia</h1>
 
 	<script src="https://code.jquery.com/jquery-2.2.4.js"
 		integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="

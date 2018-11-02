@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.appvet.entities.Cliente;
 import com.appvet.entities.Mascota;
 import com.appvet.service.HistoriaClinicaService;
+import com.appvet.service.MascotaService;
 
 @Controller
 @RequestMapping(value = "/historiaclinica")
@@ -19,17 +20,32 @@ public class HistoriaClinicaController {
 	@Autowired
 	HistoriaClinicaService historiaClinicaService;
 	
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	@Autowired
+	MascotaService mascotaService;
+	
+	/*@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public ModelAndView hcindex() {
 		ModelAndView model = new ModelAndView("historiaclinica/registrar");
 		return model;
-	}
+	}*/
+	
+	
 	@RequestMapping(value = "/{idmascota}", method = RequestMethod.GET)
 	public ModelAndView showHistoriaClinica(@PathVariable int idmascota) {
 		//System.out.println("id: "+idmascota);
-		ModelAndView model = new ModelAndView("historiaclinica/registrar");
-		model.addObject("idmascota", idmascota);
-		return model;
+		Mascota mascota = mascotaService.getOneMascota(idmascota);
+		int valores = mascota.getHistoriaclinicas().size();
+		System.out.println(valores);
+		
+		//ModelAndView model;
+		if(valores == 0) {
+			ModelAndView model = new ModelAndView("historiaclinica/registrar");
+			return model;
+		}else {
+			ModelAndView model = new ModelAndView("historiaclinica/detalle");
+			return model;
+		}
+		
 	}	
 
 }

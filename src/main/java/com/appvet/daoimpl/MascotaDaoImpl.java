@@ -34,4 +34,9 @@ public class MascotaDaoImpl implements MascotaDao {
 		mascotaRepository.deleteById(id);
 	}
 
+	@Override
+	public Mascota getOneMascota(int id) {
+		return mascotaRepository.findById(id).get();
+	}
+
 }
