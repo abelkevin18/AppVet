@@ -10,15 +10,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.appvet.entities.Cliente;
 import com.appvet.service.ClienteService;
 
 @Controller
+@RestController
 @RequestMapping(value = "/cliente")
 public class ClienteController {
 	
@@ -50,5 +53,10 @@ public class ClienteController {
 		clienteService.deleteCliente(idcliente);
 		map.put("status", "1");
 		return map;
+	}
+	
+	@GetMapping("/list")
+	public List<Cliente> getCustomers() {
+		return clienteService.findAllCliente();
 	}
 }

@@ -46,7 +46,7 @@
 							<label>Dueño: </label>
 							<div class="input-group mb-3">
 								<input type="text" class="form-control" id="propietario">
-								<input type="text" class="form-control" id="idcliente">
+								<input type="hidden" class="form-control" id="idcliente">
 								<div class="input-group-append">
 									<button class="btn btn-success showclientes" type="button"
 										id="show01" data-toggle="modal"
@@ -124,6 +124,8 @@
 							<th>F.N.</th>
 							<th>Sexo</th>
 							<th>Características</th>
+							<th>Propietario</th>
+							<th style="display: none">F.N.</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -138,8 +140,11 @@
 								<td class="td04"><fmt:formatDate pattern="dd-MM-yyyy"
 										value="${mascota.fechanacimiento}" /></td>
 								<td class="td05">${mascota.sexo}</td>
-								<td class="td05">${mascota.caracteristicas}</td>
+								<td class="td06">${mascota.caracteristicas}</td>
+								<td class="td07">${mascota.cliente.nombre} ${mascota.cliente.apellido}</td>
+								<td class="td08" style="display: none">${mascota.fechanacimiento}</td>
 								<td><button type='button' id='${mascota.idmascota}'
+										name='${mascota.cliente.idcliente}'
 										class="btn btn-warning btn-round editarMascota"
 										data-toggle="modal" data-target="#modalUpdateMascota"
 										title="Editar">
@@ -149,7 +154,18 @@
 										class="btn btn-danger btn-round deleteMascota"
 										title="Eliminar">
 										<i class="far fa-trash-alt"></i>
-									</button></td>
+									</button>
+									<!-- <a type='button' id='${mascota.idmascota}'
+										class="btn btn-info btn-round showhc"
+										title="Ver historia clinica">
+										<i class="far fa-list-alt"></i>
+									</a> -->
+									<a type='button' href="${pageContext.request.contextPath}/historiaclinica/${mascota.idmascota}"
+										class="btn btn-info btn-round"
+										title="Ver historia clinica">
+										<i class="far fa-list-alt"></i>
+									</a>
+									</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -158,7 +174,7 @@
 				</table>
 			</div>
 		</div>
-		<input type="text" id="showlistcliente" value="0"/>
+		<input type="hidden" id="showlistcliente" value="0" />
 		<!-- modal -->
 		<div class="modal fade" id="modalUpdateMascota" tabindex="-1" role="">
 			<div class="modal-dialog modal-lg" role="document">
@@ -182,7 +198,7 @@
 										<label>Dueño: </label>
 										<div class="input-group mb-3">
 											<input type="text" class="form-control" id="propietario_">
-											<input type="text" class="form-control" id="idcliente_">
+											<input type="hidden" class="form-control" id="idcliente_">
 											<div class="input-group-append">
 												<button class="btn btn-success showclientes" type="button"
 													id="show02" data-toggle="modal"
@@ -243,7 +259,7 @@
 								</div>
 							</form>
 							<button type="button" class="btn btn-primary"
-								onclick="editarCliente()">Editar</button>
+								onclick="editarMascota()">Editar</button>
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 						</div>
 					</div>
