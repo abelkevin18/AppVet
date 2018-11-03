@@ -1,5 +1,6 @@
 package com.appvet.controller;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.appvet.entities.Cliente;
+import com.appvet.entities.Detallehistoria;
 import com.appvet.entities.Historiaclinica;
 import com.appvet.entities.Mascota;
 import com.appvet.service.DetalleHistoriaClinicaService;
@@ -73,21 +75,38 @@ public class HistoriaClinicaController {
 		
 		Historiaclinica hc02 = historiaClinicaService.saveHC(historia);
 		
-		System.out.println(hc02.getIdhistoria());
+		//System.out.println(hc02.getIdhistoria());
 		
-		/*String motivoconsulta =  request.getParameter("motivoconsulta");
-		String temperatura =  request.getParameter("temperatura");
+		String motivoconsulta =  request.getParameter("motivoconsulta");
+		BigDecimal temperatura = new BigDecimal(request.getParameter("temperatura"));
 		String frecuenciacardiaca =  request.getParameter("frecuenciacardiaca");
 		String frecuenciarespiratoria =  request.getParameter("frecuenciarespiratoria");
-		String peso =  request.getParameter("peso");
+		BigDecimal peso = new BigDecimal(request.getParameter("peso"));
 		String sintomas =  request.getParameter("sintomas");
 		String anamnesis =  request.getParameter("anamnesis");
 		String diagnosticopresuntivo =  request.getParameter("diagnosticopresuntivo");
 		String pruebasclinicas =  request.getParameter("pruebasclinicas");
 		String diagnosticodefinitivo =  request.getParameter("diagnosticodefinitivo");
 		String plantratamiento =  request.getParameter("plantratamiento");
-		String observaciones =  request.getParameter("observaciones");*/
+		String observaciones =  request.getParameter("observaciones");
 		
+		Detallehistoria dh = new Detallehistoria();
+		
+		dh.setHistoriaclinica(hc02);
+		dh.setMotivoconsulta(motivoconsulta);
+		dh.setTemperatura(temperatura);
+		dh.setFrecuenciacardiaca(Integer.parseInt(frecuenciacardiaca));
+		dh.setFrecuenciarespiratoria(Integer.parseInt(frecuenciarespiratoria));
+		dh.setPeso(peso);
+		dh.setSintomas(sintomas);
+		dh.setAnamnesis(anamnesis);
+		dh.setDiagnosticopresuntivo(diagnosticopresuntivo);
+		dh.setPruebasclinicas(pruebasclinicas);
+		dh.setDiagnosticodefinitivo(diagnosticodefinitivo);
+		dh.setPlantratamiento(plantratamiento);
+		dh.setObservaciones(observaciones);
+		
+		detalleHistoriaClinicaService.saveDetalleHc(dh);
 		
 		map.put("status", "1");
 		return map;

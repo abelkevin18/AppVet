@@ -1,3 +1,11 @@
+$(document).ready(function() {
+	$('#sidebarCollapse').on('click', function() {
+		$('#sidebar').toggleClass('active');
+	});
+
+});
+
+
 $(document).on("click", ".savehc", function() {
 	var idmascota = parseInt($(this).attr("id"));
 	

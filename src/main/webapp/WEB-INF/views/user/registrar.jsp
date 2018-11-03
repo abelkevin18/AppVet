@@ -20,291 +20,304 @@
 	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
 	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="../../css/stylebar.css">
 
 <title>Lista de Usuarios</title>
 </head>
 <body>
+	<div class="wrapper">
+		<!-- Sidebar  -->
+		<%@include file="../partials/navbar.jsp"%>
 
-	<div class="container">
-		<div class="card">
-			<div class="card-header">REGISTRAR USUARIO</div>
-			<div class="card-body">
-				<form>
-					<div class="row">
-						<div class="col-md-4">
-							<label>Nombre: </label>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="far fa-user"></i></span>
-								</div>
-								<input type="text" class="form-control" id="nombre">
-							</div>
-						</div>
-						<div class="col-md-4">
-							<label>Apellido: </label>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="far fa-user"></i></span>
-								</div>
-								<input type="text" class="form-control" id="apellido">
-							</div>
-						</div>
-						<div class="col-md-4">
-							<label>Número de DNI: </label>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="far fa-user"></i></span>
-								</div>
-								<input type="text" class="form-control" id="dni">
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-8">
-							<label>Dirección: </label>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="far fa-user"></i></span>
-								</div>
-								<input type="text" class="form-control" id="direccion">
-							</div>
-						</div>
-						<div class="col-md-4">
-							<label>Telefono: </label>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="far fa-user"></i></span>
-								</div>
-								<input type="text" class="form-control" id="telefono">
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div class="row">
-						<div class="col-md-4">
-							<label>Nombre de Usuario: </label>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="far fa-user"></i></span>
-								</div>
-								<input type="text" class="form-control" id="nombreusuario">
-							</div>
-						</div>
-						<div class="col-md-4">
-							<label>Clave: </label>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="far fa-user"></i></span>
-								</div>
-								<input type="password" class="form-control" id="clave1">
-							</div>
-						</div>
-						<div class="col-md-4">
-							<label>Repetir Clave: </label>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="far fa-user"></i></span>
-								</div>
-								<input type="password" class="form-control" id="clave2">
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-6">
-							<label>Estado: </label>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<label class="input-group-text"><i class="far fa-user"></i></label>
-								</div>
-								<select class="custom-select" id="estado">
-									<option value="Habilitado">Habilitado</option>
-									<option value="Deshabilitado">Deshabilitado</option>
-
-								</select>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<label>Cargo: </label>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<label class="input-group-text"><i class="far fa-user"></i></label>
-								</div>
-								<select class="custom-select" id="cargo">
-									<option value="Trabajador">Trabajador</option>
-									<option value="Administrador">Administrador</option>
-								</select>
-							</div>
-						</div>
-					</div>
-				</form>
-				<button type="button" class="btn btn-primary" onclick="saveUser()">Registrar</button>
-			</div>
-		</div>
-		<div class="card">
-			<div class="card-header">Lista de Usuarios</div>
-			<div class="card-body">
-				<table id="tableUsuarios" class="table table-striped table-bordered"
-					style="width: 100%">
-					<thead>
-						<tr>
-							<th>Nombres</th>
-							<th>Apellidos</th>
-							<th>DNI</th>
-							<th>Direccion</th>
-							<th>Teléfono</th>
-							<th>Nombre Usuario</th>
-							<th>Estado</th>
-							<th>Cargo</th>
-							<th></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody id="bodyTableUsuarios">
-
-						<c:forEach var="user" items="${users}">
-							<tr id="trs">
-								<td class="td01">${user.nombre}</td>
-								<td class="td02">${user.apellido}</td>
-								<td class="td03">${user.dni}</td>
-								<td class="td04">${user.direccion}</td>
-								<td class="td05">${user.telefono}</td>
-								<td class="td06">${user.nombreusuario}</td>
-								<td class="td07">${user.estado}</td>
-								<td class="td08">${user.cargo}</td>
-
-								<td><button type='button' id='${user.idusuario}'
-										class="btn btn-warning btn-round editarUsuario"
-										data-toggle="modal" data-target="#modalUpdateUsuario"
-										title="Editar">
-										<i class="far fa-edit"></i>
-									</button></td>
-								<td><button type='button' id='${user.idusuario}'
-										class="btn btn-danger btn-round deleteUsuario"
-										title="Eliminar">
-										<i class="far fa-trash-alt"></i>
-									</button></td>
-							</tr>
-						</c:forEach>
-
-					</tbody>
-					<tfoot>
-					</tfoot>
-				</table>
-			</div>
-		</div>
-
-		<!-- modal -->
-		<div class="modal fade" id="modalUpdateUsuario" tabindex="-1" role="">
-			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content">
-					<div class="card">
-						<div class="card-header">REGISTRAR USUARIO</div>
-						<div class="card-body">
-							<form>
-								<div class="row">
-									<div class="col-md-4">
-										<label>Nombre: </label>
-										<div class="input-group mb-3">
-											<div class="input-group-prepend">
-												<span class="input-group-text"><i class="far fa-user"></i></span>
-											</div>
-											<input type="text" class="form-control" id="nombre_">
-											<input type="hidden" class="form-control" id="idusuario_">
-										</div>
+		<div class="content">
+			<%@include file="../partials/bar.jsp"%>
+			<div class="card">
+				<div class="card-header">REGISTRAR USUARIO</div>
+				<div class="card-body">
+					<form>
+						<div class="row">
+							<div class="col-md-4">
+								<label>Nombre: </label>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="far fa-user"></i></span>
 									</div>
-									<div class="col-md-4">
-										<label>Apellido: </label>
-										<div class="input-group mb-3">
-											<div class="input-group-prepend">
-												<span class="input-group-text"><i class="far fa-user"></i></span>
-											</div>
-											<input type="text" class="form-control" id="apellido_">
-										</div>
-									</div>
-									<div class="col-md-4">
-										<label>Número de DNI: </label>
-										<div class="input-group mb-3">
-											<div class="input-group-prepend">
-												<span class="input-group-text"><i class="far fa-user"></i></span>
-											</div>
-											<input type="text" class="form-control" id="dni_">
-										</div>
-									</div>
+									<input type="text" class="form-control" id="nombre">
 								</div>
-								<div class="row">
-									<div class="col-md-8">
-										<label>Dirección: </label>
-										<div class="input-group mb-3">
-											<div class="input-group-prepend">
-												<span class="input-group-text"><i class="far fa-user"></i></span>
-											</div>
-											<input type="text" class="form-control" id="direccion_">
-										</div>
+							</div>
+							<div class="col-md-4">
+								<label>Apellido: </label>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="far fa-user"></i></span>
 									</div>
-									<div class="col-md-4">
-										<label>Telefono: </label>
-										<div class="input-group mb-3">
-											<div class="input-group-prepend">
-												<span class="input-group-text"><i class="far fa-user"></i></span>
-											</div>
-											<input type="text" class="form-control" id="telefono_">
-										</div>
-									</div>
+									<input type="text" class="form-control" id="apellido">
 								</div>
-								<hr>
-								<div class="row">
-									<div class="col-md-8">
-										<label>Nombre de Usuario: </label>
-										<div class="input-group mb-3">
-											<div class="input-group-prepend">
-												<span class="input-group-text"><i class="far fa-user"></i></span>
-											</div>
-											<input type="text" class="form-control" id="nombreusuario_">
-										</div>
+							</div>
+							<div class="col-md-4">
+								<label>Número de DNI: </label>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="far fa-user"></i></span>
 									</div>
+									<input type="text" class="form-control" id="dni">
 								</div>
-
-								<div class="row">
-									<div class="col-md-6">
-										<label>Estado: </label>
-										<div class="input-group mb-3">
-											<div class="input-group-prepend">
-												<label class="input-group-text"><i
-													class="far fa-user"></i></label>
-											</div>
-											<select class="custom-select" id="estado_">
-												<option value="Habilitado">Habilitado</option>
-												<option value="Deshabilitado">Deshabilitado</option>
-
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<label>Cargo: </label>
-										<div class="input-group mb-3">
-											<div class="input-group-prepend">
-												<label class="input-group-text"><i
-													class="far fa-user"></i></label>
-											</div>
-											<select class="custom-select" id="cargo_">
-												<option value="Trabajador">Trabajador</option>
-												<option value="Administrador">Administrador</option>
-											</select>
-										</div>
-									</div>
-								</div>
-							</form>
-							<button type="button" class="btn btn-primary"
-								onclick="editarUsuario()">Editar</button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+							</div>
 						</div>
-					</div>
+						<div class="row">
+							<div class="col-md-8">
+								<label>Dirección: </label>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="far fa-user"></i></span>
+									</div>
+									<input type="text" class="form-control" id="direccion">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<label>Telefono: </label>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="far fa-user"></i></span>
+									</div>
+									<input type="text" class="form-control" id="telefono">
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-md-4">
+								<label>Nombre de Usuario: </label>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="far fa-user"></i></span>
+									</div>
+									<input type="text" class="form-control" id="nombreusuario">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<label>Clave: </label>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="far fa-user"></i></span>
+									</div>
+									<input type="password" class="form-control" id="clave1">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<label>Repetir Clave: </label>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="far fa-user"></i></span>
+									</div>
+									<input type="password" class="form-control" id="clave2">
+								</div>
+							</div>
+						</div>
 
+						<div class="row">
+							<div class="col-md-6">
+								<label>Estado: </label>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<label class="input-group-text"><i class="far fa-user"></i></label>
+									</div>
+									<select class="custom-select" id="estado">
+										<option value="Habilitado">Habilitado</option>
+										<option value="Deshabilitado">Deshabilitado</option>
+
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<label>Cargo: </label>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<label class="input-group-text"><i class="far fa-user"></i></label>
+									</div>
+									<select class="custom-select" id="cargo">
+										<option value="Trabajador">Trabajador</option>
+										<option value="Administrador">Administrador</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</form>
+					<button type="button" class="btn btn-primary" onclick="saveUser()">Registrar</button>
 				</div>
 			</div>
+			<div class="card">
+				<div class="card-header">Lista de Usuarios</div>
+				<div class="card-body">
+					<table id="tableUsuarios"
+						class="table table-striped table-bordered" style="width: 100%">
+						<thead>
+							<tr>
+								<th>Nombres</th>
+								<th>Apellidos</th>
+								<th>DNI</th>
+								<th>Direccion</th>
+								<th>Teléfono</th>
+								<th>Nombre Usuario</th>
+								<th>Estado</th>
+								<th>Cargo</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="bodyTableUsuarios">
+
+							<c:forEach var="user" items="${users}">
+								<tr id="trs">
+									<td class="td01">${user.nombre}</td>
+									<td class="td02">${user.apellido}</td>
+									<td class="td03">${user.dni}</td>
+									<td class="td04">${user.direccion}</td>
+									<td class="td05">${user.telefono}</td>
+									<td class="td06">${user.nombreusuario}</td>
+									<td class="td07">${user.estado}</td>
+									<td class="td08">${user.cargo}</td>
+
+									<td><button type='button' id='${user.idusuario}'
+											class="btn btn-warning btn-round editarUsuario"
+											data-toggle="modal" data-target="#modalUpdateUsuario"
+											title="Editar">
+											<i class="far fa-edit"></i>
+										</button></td>
+									<td><button type='button' id='${user.idusuario}'
+											class="btn btn-danger btn-round deleteUsuario"
+											title="Eliminar">
+											<i class="far fa-trash-alt"></i>
+										</button></td>
+								</tr>
+							</c:forEach>
+
+						</tbody>
+						<tfoot>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+
+			<!-- modal -->
+			<div class="modal fade" id="modalUpdateUsuario" tabindex="-1" role="">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="card">
+							<div class="card-header">REGISTRAR USUARIO</div>
+							<div class="card-body">
+								<form>
+									<div class="row">
+										<div class="col-md-4">
+											<label>Nombre: </label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i
+														class="far fa-user"></i></span>
+												</div>
+												<input type="text" class="form-control" id="nombre_">
+												<input type="hidden" class="form-control" id="idusuario_">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<label>Apellido: </label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i
+														class="far fa-user"></i></span>
+												</div>
+												<input type="text" class="form-control" id="apellido_">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<label>Número de DNI: </label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i
+														class="far fa-user"></i></span>
+												</div>
+												<input type="text" class="form-control" id="dni_">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-8">
+											<label>Dirección: </label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i
+														class="far fa-user"></i></span>
+												</div>
+												<input type="text" class="form-control" id="direccion_">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<label>Telefono: </label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i
+														class="far fa-user"></i></span>
+												</div>
+												<input type="text" class="form-control" id="telefono_">
+											</div>
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-md-8">
+											<label>Nombre de Usuario: </label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i
+														class="far fa-user"></i></span>
+												</div>
+												<input type="text" class="form-control" id="nombreusuario_">
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<label>Estado: </label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<label class="input-group-text"><i
+														class="far fa-user"></i></label>
+												</div>
+												<select class="custom-select" id="estado_">
+													<option value="Habilitado">Habilitado</option>
+													<option value="Deshabilitado">Deshabilitado</option>
+
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<label>Cargo: </label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<label class="input-group-text"><i
+														class="far fa-user"></i></label>
+												</div>
+												<select class="custom-select" id="cargo_">
+													<option value="Trabajador">Trabajador</option>
+													<option value="Administrador">Administrador</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</form>
+								<button type="button" class="btn btn-primary"
+									onclick="editarUsuario()">Editar</button>
+								<button type="button" class="btn btn-danger"
+									data-dismiss="modal">Cancelar</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- fin modal -->
 		</div>
-		<!-- fin modal -->
 	</div>
 
 	<script src="https://code.jquery.com/jquery-2.2.4.js"
