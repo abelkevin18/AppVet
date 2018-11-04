@@ -36,14 +36,15 @@ function agregar() {
 	var descripcion = $("#descripcion").val();
 	var preciounitario = $("#preciounitario").val();
 
-	tbody = "<tr>\n\
-        <td>"
+	var index = parseInt(document.getElementById("tabledetallepago").rows.length);
+	tbody = "<tr class='fila'>\n\
+        <td class='cantidad"+index+"'>"
 			+ cantidad
-			+ "</th>\n\
-        <td>"
+			+ "</td>\n\
+        <td class='descripcion"+index+"'>"
 			+ descripcion
 			+ "</td>\n\
-        <td>"
+        <td class='preciounitario"+index+"'>"
 			+ preciounitario
 			+ "</td>\n\
         <td><button class=\"btn btn-danger borrar\"><i class=\"fas fa-trash-alt\"></i></button></td>\n\
@@ -94,7 +95,7 @@ function calcularPago() {
 };
 
 function registrarPago() {
-
+	// pago
 	var idusuario = 4;
 	var idcliente = $('#idcliente').val();
 	var fechapago = $('#fechapago').val();
@@ -105,17 +106,42 @@ function registrarPago() {
 	var cantidad;
 	var descripcion;
 	var preciounitario;
+
+	/*console.log(idcliente + " " + fechapago + " " + subtotal + " " + descuento
+			+ " " + total);*/
+	// detalle pago
+	var index = parseInt(document.getElementById("tabledetallepago").rows.length);
+	var arregloJson="[";
 	
-	console.log(idcliente+ " " +fechapago+ " " +subtotal+ " " +descuento+ " " +total);
-
-	/*var index = parseInt(document.getElementById("tabledetallepago").rows.length);
-
+	var subindex = parseInt(index-1);
 	for (i = 1; i < index; i++) {
-		cantidad = document.getElementById("tabledetallepago").rows[i].cells[0].innerText;
-		descripcion = document.getElementById("tabledetallepago").rows[i].cells[1].innerText;
-		preciounitario = document.getElementById("tabledetallepago").rows[i].cells[2].innerText;
-	}*/
-
+		
+		cantidad = $(".fila").find('.cantidad' + i).html();
+		descripcion = $(".fila").find('.descripcion' + i).html();
+		preciounitario = $(".fila").find('.preciounitario' + i).html();
+		
+		//console.log(i+": "+ cantidad+ " "+descripcion+" "+preciounitario);
+		arregloJson+="{ \"cantidad\" : "+cantidad+", ";
+		arregloJson+="\"descripcion\" : \""+descripcion+"\", ";
+		
+		if(i===subindex){
+			arregloJson+="\"preciounitario\" : "+ preciounitario+"}";
+		}else{
+			arregloJson+="\"preciounitario\"  : "+ preciounitario+"},";
+		}
+		
+	}
+	arregloJson+="]";
+	//console.log(arregloJson);
+	var arrayJson = JSON.parse(arregloJson);
+	
+	/*var dobj = [{ item: 1, value: 'ABCD'},
+		{ item: 2, value: 'EFGH'},
+		{ item: 3, value: 'IJKL'},
+		{ item: 4, value: 'MNOP'}];*/
+	
+	//console.log(dobj);
+	//console.log(arrayJson);
 	$.ajax({
 		url : 'saveOrUpdate',
 		type : 'POST',
@@ -128,7 +154,19 @@ function registrarPago() {
 			"total" : total
 		},
 		success : function(responseJson) {
-			console.log("exito");
+			//console.log("exito");
+			var idpago = parseInt(responseJson.idpago);
+			//console.log(idpago);
+			$.ajax({
+				type : "POST",
+				contentType : 'application/json; charset=utf-8',
+				dataType : 'json',
+				url : "saveDetallePago/"+idpago,
+				data : JSON.stringify(arrayJson),
+				success : function(result) {	
+					//console.log("exito2");
+				}
+			});
 		}
 	});
 
