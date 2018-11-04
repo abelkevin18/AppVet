@@ -32,4 +32,9 @@ public class ClienteServiceImpl implements ClienteService{
 		
 	}
 
+	@Override
+	public Cliente getOneCliente(int id) {
+		return clienteDao.getOneCliente(id);
+	}
+
 }

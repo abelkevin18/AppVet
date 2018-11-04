@@ -8,4 +8,6 @@ public interface UsuarioService {
 	public List<Usuario> getAllUsers();
 	public void saveOrUpdate(Usuario usuario);
 	public void deleteUser(int id);
+	public Usuario getOneUsuario(int id);
+	
 }

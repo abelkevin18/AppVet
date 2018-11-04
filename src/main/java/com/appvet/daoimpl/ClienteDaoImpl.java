@@ -32,4 +32,9 @@ public class ClienteDaoImpl implements ClienteDao{
 		clienteRepository.deleteById(id);
 	}
 
+	@Override
+	public Cliente getOneCliente(int id) {
+		return clienteRepository.findById(id).get(); 
+	}
+
 }
