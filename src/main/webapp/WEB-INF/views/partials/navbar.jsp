@@ -23,6 +23,16 @@
 				<li><a href="${pageContext.request.contextPath}/mascota/index">Gestionar
 						Mascota</a></li>
 			</ul></li>
+		<li><a href="#pagoSubmenu" data-toggle="collapse"
+			aria-expanded="false" class="dropdown-toggle">Pago</a>
+			<ul class="collapse list-unstyled" id="pagoSubmenu">
+				<li><a href="${pageContext.request.contextPath}/pago/index">Gastionar Pago</a></li>
+			</ul></li>
+		<li><a href="#CitaSubmenu" data-toggle="collapse"
+			aria-expanded="false" class="dropdown-toggle">Cita</a>
+			<ul class="collapse list-unstyled" id="CitaSubmenu">
+				<li><a href="${pageContext.request.contextPath}/cita/index">Gastionar Cita</a></li>
+			</ul></li>
 
 	</ul>
 </nav>

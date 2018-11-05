@@ -42,7 +42,7 @@
 								<label>Cliente: </label>
 								<div class="input-group mb-3">
 									<input type="text" class="form-control" id="cliente"> <input
-										type="text" class="form-control" id="idcliente">
+										type="hidden" class="form-control" id="idcliente">
 									<div class="input-group-append">
 										<button class="btn btn-success showclientes" type="button"
 											id="show01" data-toggle="modal"

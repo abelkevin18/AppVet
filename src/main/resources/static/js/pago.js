@@ -163,8 +163,12 @@ function registrarPago() {
 				dataType : 'json',
 				url : "saveDetallePago/"+idpago,
 				data : JSON.stringify(arrayJson),
-				success : function(result) {	
-					//console.log("exito2");
+				success : function(responseJson) {
+					var message = responseJson.status;
+					if (message === "1") {
+						alert("Pago almacenado correctamente.");
+						location.reload();
+					}
 				}
 			});
 		}
